@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ heading }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .box {
+            width: 45%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .instruction {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .input-field,
+        .key-field {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>Vigenere Cipher</h1>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="instruction">Message:</div>
+                <label for="message1"></label>
+                <textarea name="message" id="message1" class="input-field" rows="5">{{ input_text_vigenere }}</textarea>
+
+                <div class="instruction">Key:</div>
+                <label for="key1"></label>
+                <input type="text" name="key" id="key1" class="key-field" value="{{ key_vigenere }}">
+
+                <button type="submit" name="action" value="EncryptVigenere">Encrypt</button>
+                <button type="submit" name="action" value="DecryptVigenere">Decrypt</button>
+            </form>
+
+            {% if output_text_vigenere %}
+            <div class="output">
+                <h2>Output:</h2>
+                <p>{{ output_text_vigenere }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="box">
+            <h1>Affine Cipher</h1>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="instruction">Message:</div>
+                <label for="message2"></label>
+                <textarea name="message" id="message2" class="input-field" rows="5">{{ input_text_affine }}</textarea>
+
+                <div class="instruction">Key a:</div>
+                <label for="key_a"></label>
+                <input type="text" name="key_a" id="key_a" class="key-field" value="{{ key_a }}">
+
+                <div class="instruction">Key b:</div>
+                <label for="key_b"></label>
+                <input type="text" name="key_b" id="key_b" class="key-field" value="{{ key_b }}">
+
+                <button type="submit" name="action" value="EncryptAffine">Encrypt</button>
+                <button type="submit" name="action" value="DecryptAffine">Decrypt</button>
+            </form>
+
+            {% if output_text_affine %}
+            <div class="output">
+                <h2>Output:</h2>
+                <p>{{ output_text_affine }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
