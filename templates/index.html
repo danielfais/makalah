@@ -5,38 +5,51 @@
     <title>{{ heading }}</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
         }
 
         .container {
             display: flex;
             justify-content: space-between;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 40px auto;
             padding: 20px;
         }
 
         .box {
             width: 45%;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: 10px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .box h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4CAF50;
         }
 
         .instruction {
             font-weight: bold;
             margin-bottom: 10px;
+            color: #555;
         }
 
         .input-field,
         .key-field {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
         }
 
         button {
@@ -46,7 +59,8 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-right: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
 
         button:hover {
@@ -55,10 +69,27 @@
 
         .output {
             margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
+            padding: 15px;
+            border: 1px solid #ddd;
             border-radius: 4px;
-            background-color: #fff;
+            background-color: #f9f9f9;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .output h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -66,55 +97,26 @@
 <body>
     <div class="container">
         <div class="box">
-            <h1>Vigenere Cipher</h1>
-
+            <h1>RSA Encryption & Decryption</h1>
             <form method="post">
                 {% csrf_token %}
                 <div class="instruction">Message:</div>
-                <label for="message1"></label>
-                <textarea name="message" id="message1" class="input-field" rows="5">{{ input_text_vigenere }}</textarea>
+                <textarea name="message" id="message2" class="input-field" rows="5">{{ input_text_rsa }}</textarea>
 
-                <div class="instruction">Key:</div>
-                <label for="key1"></label>
-                <input type="text" name="key" id="key1" class="key-field" value="{{ key_vigenere }}">
+                <div class="instruction">Public Key:</div>
+                <input type="text" name="public_key" id="public_key" class="key-field" value="{{ public_key }}">
 
-                <button type="submit" name="action" value="EncryptVigenere">Encrypt</button>
-                <button type="submit" name="action" value="DecryptVigenere">Decrypt</button>
+                <div class="instruction">Private Key:</div>
+                <input type="text" name="private_key" id="private_key" class="key-field" value="{{ private_key }}">
+
+                <button type="submit" name="action" value="EncryptRSA">Encrypt</button>
+                <button type="submit" name="action" value="DecryptRSA">Decrypt</button>
             </form>
 
-            {% if output_text_vigenere %}
+            {% if output_text_rsa %}
             <div class="output">
                 <h2>Output:</h2>
-                <p>{{ output_text_vigenere }}</p>
-            </div>
-            {% endif %}
-        </div>
-
-        <div class="box">
-            <h1>Affine Cipher</h1>
-
-            <form method="post">
-                {% csrf_token %}
-                <div class="instruction">Message:</div>
-                <label for="message2"></label>
-                <textarea name="message" id="message2" class="input-field" rows="5">{{ input_text_affine }}</textarea>
-
-                <div class="instruction">Key a:</div>
-                <label for="key_a"></label>
-                <input type="text" name="key_a" id="key_a" class="key-field" value="{{ key_a }}">
-
-                <div class="instruction">Key b:</div>
-                <label for="key_b"></label>
-                <input type="text" name="key_b" id="key_b" class="key-field" value="{{ key_b }}">
-
-                <button type="submit" name="action" value="EncryptAffine">Encrypt</button>
-                <button type="submit" name="action" value="DecryptAffine">Decrypt</button>
-            </form>
-
-            {% if output_text_affine %}
-            <div class="output">
-                <h2>Output:</h2>
-                <p>{{ output_text_affine }}</p>
+                <p>{{ output_text_rsa }}</p>
             </div>
             {% endif %}
         </div>
